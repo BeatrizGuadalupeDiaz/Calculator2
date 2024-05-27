@@ -2,78 +2,99 @@ import {Text, View} from 'react-native';
 import React from 'react';
 import {colors, globalStyles} from '../../config/theme/app_themes';
 import {CalculatorBotton} from '../components/CalculatorBotton';
-
+import {useCalculator} from '../hooks/useCalculator';
 export const CalculatorScreen = () => {
+  const {
+    number,
+    previousNumber,
+    formula,
+    bildNumber,
+    clean,
+    deleteOperation,
+    toggleSing,
+    divideOperation,
+    multiplyOperation,
+    substractOperation,
+    addOperation,
+    calculateResult,
+  } = useCalculator();
   return (
     <View style={globalStyles.calculatorContainer}>
       <View style={{paddingHorizontal: 30, paddingBottom: 20}}>
-        <Text style={globalStyles.mainResult}>1500</Text>
-        <Text style={globalStyles.subResult}>15</Text>
+        <Text
+          adjustsFontSizeToFit
+          numberOfLines={1}
+          style={globalStyles.mainResult}>
+          {number}
+        </Text>
+        <Text style={globalStyles.subResult}>
+          {previousNumber === '0' ? '' : previousNumber}
+        </Text>
       </View>
       <View style={globalStyles.row}>
         <CalculatorBotton
-          onPress={() => console.log('C')}
+          onPress={clean}
           label="C"
           color={colors.lightGray}
           blacktext
         />
         <CalculatorBotton
-          onPress={() => console.log('+/-')}
+          onPress={toggleSing}
           label="+/-"
           color={colors.lightGray}
           blacktext
         />
         <CalculatorBotton
-          onPress={() => console.log('DEL')}
+          onPress={deleteOperation}
           label="DEL"
           color={colors.lightGray}
           blacktext
         />
         <CalculatorBotton
-          onPress={() => console.log('÷')}
+          onPress={divideOperation}
           label="÷"
           color={colors.orange}
         />
       </View>
       <View style={globalStyles.row}>
-        <CalculatorBotton onPress={() => console.log('7')} label="7" />
-        <CalculatorBotton onPress={() => console.log('8')} label="8" />
-        <CalculatorBotton onPress={() => console.log('9')} label="9" />
+        <CalculatorBotton onPress={() => bildNumber('7')} label="7" />
+        <CalculatorBotton onPress={() => bildNumber('8')} label="8" />
+        <CalculatorBotton onPress={() => bildNumber('9')} label="9" />
         <CalculatorBotton
-          onPress={() => console.log('×')}
+          onPress={multiplyOperation}
           label="×"
           color={colors.orange}
         />
       </View>
       <View style={globalStyles.row}>
-        <CalculatorBotton onPress={() => console.log('4')} label="4" />
-        <CalculatorBotton onPress={() => console.log('5')} label="5" />
-        <CalculatorBotton onPress={() => console.log('6')} label="6" />
+        <CalculatorBotton onPress={() => bildNumber('4')} label="4" />
+        <CalculatorBotton onPress={() => bildNumber('5')} label="5" />
+        <CalculatorBotton onPress={() => bildNumber('6')} label="6" />
         <CalculatorBotton
-          onPress={() => console.log('-')}
+          onPress={substractOperation}
           label="-"
           color={colors.orange}
         />
       </View>
       <View style={globalStyles.row}>
-        <CalculatorBotton onPress={() => console.log('1')} label="1" />
-        <CalculatorBotton onPress={() => console.log('2')} label="2" />
-        <CalculatorBotton onPress={() => console.log('3')} label="3" />
+        <CalculatorBotton onPress={() => bildNumber('1')} label="1" />
+        <CalculatorBotton onPress={() => bildNumber('2')} label="2" />
+        <CalculatorBotton onPress={() => bildNumber('3')} label="3" />
         <CalculatorBotton
-          onPress={() => console.log('+')}
+          onPress={addOperation}
           label="+"
           color={colors.orange}
         />
       </View>
       <View style={globalStyles.row}>
         <CalculatorBotton
-          onPress={() => console.log('0')}
+          onPress={() => bildNumber('0')}
           label="0"
           doubleSize
         />
-        <CalculatorBotton onPress={() => console.log('.')} label="." />
+        <CalculatorBotton onPress={() => bildNumber('.')} label="." />
         <CalculatorBotton
-          onPress={() => console.log('=')}
+          onPress={calculateResult}
           label="="
           color={colors.orange}
         />
